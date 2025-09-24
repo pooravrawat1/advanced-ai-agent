@@ -1,6 +1,6 @@
 from typing import Dict,Any
 from langgraph.graph import StateGraph, END
-from langgchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from .models import ResearchState, CompanyAnalysis, CompanyInfo
 from .firecrawl import FirecrawlService
 from .prompt import DeveloperToolsPrompts
@@ -13,7 +13,7 @@ class Workflow:
         self.workflow = self._build_workflow()
 
     def _build_workflow(self):
-        graph = StateGraph()
+        graph = StateGraph(ResearchState)
         graph.add_node("extract_nodes", self._extract_tools_step)
         graph.add_node("research", self._research_step)
         graph.add_node("analyze", self._analyze_steps)
