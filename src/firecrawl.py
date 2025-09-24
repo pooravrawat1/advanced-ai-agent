@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class FirecrawlSettings():
+class FirecrawlService():
     def __init__(self):
         api_key = os.getenv("FIRECRAWL_API_KEY")
         if not api_key:
