@@ -32,11 +32,13 @@ class Workflow:
         search_results = self.firecrawl.search_companies(article_query, num_results=3)
 
         all_content = ""
-        for result in search_results.data:
+        # Handle both list and object with .data attribute
+        results_list = search_results.data if hasattr(search_results, 'data') else search_results
+        for result in results_list:
             url = result.get("url", "")
-            scraped = self.firecrawl.scrape_company_pages(url)
+            scraped = self.firecrawl.scrape_companies_pages(url)
             if scraped:
-                all_content + scraped.markdown[:1500] + "\n\n"
+                all_content += scraped.markdown[:1500] + "\n\n"
 
         messages = [
             SystemMessage(content=self.prompts.TOOL_EXTRACTION_SYSTEM),
