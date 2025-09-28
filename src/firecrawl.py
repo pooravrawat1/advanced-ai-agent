@@ -1,5 +1,6 @@
 import os
-from firecrawl import FirecrawlApp, ScrapeOptions
+from firecrawl import FirecrawlApp
+from firecrawl.v2.types import ScrapeOptions
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,7 +29,7 @@ class FirecrawlService:
 
     def scrape_company_pages(self, url: str):
         try:
-            result = self.app.scrape_url(
+            result = self.app.scrape(
                 url,
                 formats=["markdown"]
             )
